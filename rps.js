@@ -1,6 +1,12 @@
-let computerScore = 0;
-let humanScore = 0;
+playerSelection = document.querySelectorAll("button");
+computerScore = document.getElementById("computerScore_span");
+playerScore = document.getElementById("playerScore_span");
+gameUpdate = document.getElementById("gameStatus");
 
+computerScore = 0;
+playerScore = 0;
+
+//making a function for computers move. 
 function computerPlay() {
 
     let computerMath = Math.floor((Math.random()*3) + 1);
@@ -16,52 +22,89 @@ function computerPlay() {
     return computerChoice;
 }
 
-function playRound() {
-    let playerSelection = prompt("Choose between Rock, Paper & Scissor").toLowerCase();
+//A function to declare player's move depending on which button he/she pressed. Then calling the function "playRound".
+playerSelection.forEach((button) => {
+
+    button.addEventListener("click", () => {
+        playRound(button.id);
+    });
+});
+
+//function if the player wins a round
+
+function win() {
+    playerScore++;
+    playerScore_span.innerHTML = playerScore;
+    gameStatus.innerHTML = "You won this round!"
+}
+
+function lose() {
+    computerScore++;
+    computerScore_span.innerHTML = computerScore;
+    gameStatus.innerHTML = "You lost this round, pick your next move wisely!";
+}
+
+function tie() {
+    gameStatus.innerHTML = "It's a tie!"
+}
+
+
+
+//Function for the round played. Using switch to compare players- & computers move and adding points depending on who won.
+function playRound(playerSelection) {
     let computerSelection = computerPlay();
 
-
     switch(computerSelection + playerSelection) {
-        case "rscissor":
-        case "prock":
-        case "spaper":
-            console.log("Computer wins!");
-            computerScore++;
+        case "rs":
+        case "pr":
+        case "sp":
+            lose();
         break;
-
-        case "rpaper":
-        case "pscissor":
-        case "srock":
-            console.log("You win!");
-            humanScore++;
+        case "rp":
+        case "ps":
+        case "sr":
+            win();
         break;
-        
-        case "rrock":
-        case "ppaper":
-        case "sscissor":
-            console.log("It/'s a tie!");
+        case "rr":
+        case "pp":
+        case "ss":
+            tie();
         break;
     }
-
+    game();
 }
 
+function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
+    playerScore_span.innerHTML = playerScore;
+    computerScore_span.innerHTML = computerScore;
+    gameStatus.innerHTML = "Pick an option!";
+    document.getElementById("r").disabled = false;
+    document.getElementById("p").disabled = false;
+    document.getElementById("s").disabled = false;
+    
+}
+
+//Disable buttons so the player can't make a choice while the game is reloading
+function disableButton() {
+    document.getElementById("r").disabled = true;
+    document.getElementById("p").disabled = true;
+    document.getElementById("s").disabled = true;
+}
+
+//Deciding who won after 5 playRounds played.
 function game() {
-
-        for (i=0; i<5; i++) {
-            playRound();
-
-            console.log("The score is: ")
-            console.log("Computer: " + computerScore);
-            console.log("Human: " + humanScore);
-        }
-
-    if (computerScore > humanScore) {
-        console.log("Computer wins the game!");
-    } else if (computerScore == humanScore) {
-        console.log("Nobody won this game, it/'s a tie!")
-    } else {
-        console.log("Human wins the game!");
+    if (playerScore === 5) {
+        gameStatus.innerHTML = "Congratulations, you won the game! <br> Wait 10 seconds and the game will restart!";
+        disableButton();
+        window.setTimeout(resetGame, 10000);
+        
+    }
+    if (computerScore === 5) {
+        gameStatus.innerHTML = "You lost the game! <br> Wait 10 seconds and the game will restart!";
+        disableButton();
+        window.setTimeout(resetGame, 10000);
     }
 }
 
-game();

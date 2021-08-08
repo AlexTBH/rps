@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <head>
-<script src="rps.js"></script> 
+<script src="rps.js" defer></script> 
+<link rel="stylesheet" href="rps.css">
 </head>
+<header>
+<p>Rock Paper Scissors, first to win 5 rounds wins the game!</p>
+</header>
 <body>
+<div class="container">
+    <div class="scoreBoard">
+        <span class="score" id="playerScore_span">0</span>:<span class="score" id="computerScore_span">0</span>
+    </div>
+    <div class="options">
+        <button class="choice" id="r">Rock</button>
+        <button class="choice" id="p">Paper</button>
+        <button class="choice" id="s">Scissor</button>
+    </div>
+    <div id="gameStatus">
+        Pick an option!
+    </div>
+</div>
 </body>

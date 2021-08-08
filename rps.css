@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    background-color:#E7E9EB;
+}
+
+header {
+    text-align: center;
+    font-size: 20px;
+}
+.scoreBoard {
+    text-align: center;
+    margin: 20px auto;
+    width: 100px;
+    border: 3px solid black;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.score {
+    padding: 5px;
+    font-size: 20px;
+}
+
+#gameStatus {
+    text-align: center;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.options {
+    margin-top: 30px, auto;
+    text-align: center;
+}
+
+.choice {
+    padding: 20px;
+    margin: 10px;
+    min-width: 100px;
+    border-radius: 35px;
+}
+
+
+
+
+
+
+
+
+
+
